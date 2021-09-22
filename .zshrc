@@ -125,15 +125,13 @@ alias prune-branches="git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}
 # ---------
 if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
   export PATH="$PATH:/usr/local/opt/fzf/bin"
+  source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
 
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-# Key bindings
-# ------------
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 eval "$(rbenv init -)"
 
@@ -142,5 +140,5 @@ export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 
 if [[ ! -z "$CODESPACES" ]]; then
-	. /home/codespace/.nix-profile/etc/profile.d/nix.sh
+        source /home/codespace/.nix-profile/etc/profile.d/nix.sh
 fi
