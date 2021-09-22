@@ -136,12 +136,11 @@ fi
 source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 eval "$(rbenv init -)"
-eval "$(nodenv init -)"
 
 export LC_ALL=en_US.UTF-8
 
 export EDITOR="nvim"
 
-if [[ ! -z "$CODESPACES"]]; then
+if [[ ! -z "$CODESPACES" ]]; then
 	. /home/codespace/.nix-profile/etc/profile.d/nix.sh
 fi
