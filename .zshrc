@@ -141,5 +141,4 @@ export EDITOR="nvim"
 
 if [[ ! -z "$CODESPACES" ]]; then
         source /home/codespace/.nix-profile/etc/profile.d/nix.sh
-        nohup keepalive.sh &
 fi
