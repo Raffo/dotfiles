@@ -75,8 +75,10 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^P" history-search-backward
 bindkey "^N" insert-last-word
 
-export GOPATH=/Users/raffo/go
-export PATH=~/bin:$GOROOT/bin:$GOPATH/bin:~/bin/google-cloud-sdk/bin/:$HOME/.cargo/bin:/:$PATH
+if [[ -z "$CODESPACES" ]]; then
+	export GOPATH=/Users/raffo/go
+	export PATH=~/bin:$GOROOT/bin:$GOPATH/bin:~/bin/google-cloud-sdk/bin/:$HOME/.cargo/bin:/:$PATH
+fi
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
@@ -123,7 +125,7 @@ alias prune-branches="git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}
 
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]] && [[ -z "$CODESPACES" ]] ; then
   export PATH="$PATH:/usr/local/opt/fzf/bin"
   source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
