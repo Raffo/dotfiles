@@ -77,8 +77,15 @@ bindkey "^N" insert-last-word
 
 if [[ -z "$CODESPACES" ]]; then
 	export GOPATH=/Users/raffo/go
+
+	if [[ "Linux" == "$(uname)" ]]; then
+		export GOPATH=/home/raffo/go
+	fi
+
 	export PATH=~/bin:$GOROOT/bin:$GOPATH/bin:~/bin/google-cloud-sdk/bin/:$HOME/.cargo/bin:/:$PATH
+	
 fi
+
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
@@ -144,3 +151,4 @@ export EDITOR="nvim"
 if [[ ! -z "$CODESPACES" ]]; then
         source /home/codespace/.nix-profile/etc/profile.d/nix.sh
 fi
+if [ -e /home/raffo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/raffo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
