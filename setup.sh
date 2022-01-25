@@ -16,4 +16,4 @@ if [ -f "$CODESPACE_VSCODE_FOLDER/codespace.nix" ]; then
     nix-env -if $CODESPACE_VSCODE_FOLDER/codespace.nix
 fi
 
-bash keepalive.sh &
+export BUNDLE_RUBYGEMS__PKG__GITHUB__COM=$GITHUB_TOKEN
