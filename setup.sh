@@ -16,4 +16,8 @@ if [ -f "$CODESPACE_VSCODE_FOLDER/codespace.nix" ]; then
     nix-env -if $CODESPACE_VSCODE_FOLDER/codespace.nix
 fi
 
+if ! grep -q "codespace.*/bin/zsh" /etc/passwd; then
+  sudo chsh -s /bin/zsh codespace
+fi
+
 export BUNDLE_RUBYGEMS__PKG__GITHUB__COM=$GITHUB_TOKEN
