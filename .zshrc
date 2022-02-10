@@ -6,6 +6,10 @@ git_prompt_info() {
   fi
 }
 
+cleanup_codespaces() {
+	gh cs delete --all --days 4 --force
+}
+
 current_kubernetes_cluster() {
     current_cluster=$(cat ~/.kube/config | grep current-context |  cut -d \: -f 2)
     echo "%{$fg_bold[red]%}$current_cluster%{$reset_color%}"
