@@ -11,6 +11,8 @@ cp .zshrc $HOME/.zshrc
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 source /home/codespace/.nix-profile/etc/profile.d/nix.sh
+nix-env -iA nixpkgs.glibcLocales
+export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
 
 if [ -f "$CODESPACE_VSCODE_FOLDER/codespace.nix" ]; then
     nix-env -if $CODESPACE_VSCODE_FOLDER/codespace.nix
