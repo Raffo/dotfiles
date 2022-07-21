@@ -136,7 +136,10 @@ alias prune-branches="git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}
 
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]] && [[ -z "$CODESPACES" ]] ; then
+#
+if [ -f "$HOME/.vim/bundle/fzf/shell/key-bindings.zsh" ]; then
+  source "$HOME/.vim/bundle/fzf/shell/key-bindings.zsh"
+elif [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]] && [[ -z "$CODESPACES" ]] ; then
   export PATH="$PATH:/usr/local/opt/fzf/bin"
   source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 fi
@@ -145,8 +148,6 @@ fi
 # ---------------
 [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
 
-
-eval "$(rbenv init -)"
 
 export LC_ALL=en_US.UTF-8
 
