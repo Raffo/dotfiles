@@ -7,6 +7,13 @@ cp vscode/settings.json $HOME/.config/Code/User/settings.json
 # copy .zshrc
 cp .zshrc $HOME/.zshrc
 
+echo "Changing shell to zsh for ${USER}..."
+# Always want to use ZSH as my default shell (e.g. for SSH)
+if ! grep -q "${USER}.*/bin/zsh" /etc/passwd
+then
+  sudo chsh -s /bin/zsh ${USER}
+fi
+
 # install nix
 curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
