@@ -14,6 +14,7 @@ source /home/codespace/.nix-profile/etc/profile.d/nix.sh
 nix-env -iA nixpkgs.glibcLocales
 export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
 
+echo "user"
 echo $CODESPACE_VSCODE_FOLDER
 if [ -f "$CODESPACE_VSCODE_FOLDER/codespace.nix" ]; then
     nix-env -if $CODESPACE_VSCODE_FOLDER/codespace.nix
