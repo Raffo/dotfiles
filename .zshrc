@@ -153,6 +153,12 @@ export LC_ALL=en_US.UTF-8
 
 export EDITOR="nvim"
 
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
+	eval "$(ssh-agent)"
+fi
+
+
 if [[ ! -z "$CODESPACES" ]]; then
         source /home/codespace/.nix-profile/etc/profile.d/nix.sh
 fi
