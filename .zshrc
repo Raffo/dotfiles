@@ -24,6 +24,7 @@ brew-shell() {
 		for program in "${programs[@]}"; do
 			brew uninstall "$program"
 		done
+		brew autoremove
 	}
 
 	trap cleanup EXIT
