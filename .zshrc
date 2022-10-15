@@ -10,6 +10,31 @@ cleanup_codespaces() {
 	gh cs delete --all --days 4 --force
 }
 
+brew-shell() {
+	set -eo pipefail
+
+	if [ $# -eq 0 ]; then
+	    echo "Must pass at least one argument."
+	    exit 1
+	fi
+
+	programs=( "$@" )
+
+	function cleanup {
+		for program in "${programs[@]}"; do
+			brew uninstall "$program"
+		done
+	}
+
+	trap cleanup EXIT
+
+	for program in "${programs[@]}"; do
+		brew install "$program"
+	done
+
+	$SHELL
+}
+
 current_kubernetes_cluster() {
     current_cluster=$(cat ~/.kube/config | grep current-context |  cut -d \: -f 2)
     echo "%{$fg_bold[red]%}$current_cluster%{$reset_color%}"
