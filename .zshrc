@@ -36,6 +36,29 @@ brew-shell() {
 	$SHELL
 }
 
+dev-shell() {
+	set -eo pipefail
+
+	if [ $# -eq 0 ]; then
+	    echo "Must pass at least one argument."
+	    exit 1
+	fi
+
+	repo=$1
+	clonedpath=$(pwd)/$repo
+
+	function cleanup {
+		rm -rIf $clonedpath
+		cd ~
+	}
+
+	trap cleanup EXIT
+
+	git clone git@github.com:github/$repo.git
+	cd $repo
+	$SHELL
+}
+
 current_kubernetes_cluster() {
     current_cluster=$(cat ~/.kube/config | grep current-context |  cut -d \: -f 2)
     echo "%{$fg_bold[red]%}$current_cluster%{$reset_color%}"
