@@ -181,6 +181,7 @@ alias nodes='k get nodes -o wide'
 alias kall='k get nodes,svc,endpoints,ingress,pods -n kube-system -o wide'
 alias check-dmg-sum='openssl dgst -sha256'
 alias prune-branches="git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D"
+alias ag="rg"
 
 
 # Setup fzf
