@@ -59,6 +59,31 @@ dev-shell() {
 	$SHELL
 }
 
+approve-prs() {
+	# Check if at least one argument is passed
+	if [ "$#" -lt 1 ]; then
+	    echo "Usage: $0 <pr_link1> <pr_link2> ..."
+	    exit 1
+	fi
+
+	# Iterate over the provided arguments (PR links)
+	for pr_link in "$@"; do
+	    # Extract owner, repo, and PR number from the URL
+	    owner=$(echo "$pr_link" | cut -d'/' -f4)
+	    repo=$(echo "$pr_link" | cut -d'/' -f5)
+	    pull_number=$(echo "$pr_link" | cut -d'/' -f7)
+
+	    # Approve the pull request
+	    gh pr review "$pull_number" --repo "$owner/$repo" --approve
+
+	    if [ $? -eq 0 ]; then
+		echo "Successfully approved PR #$pull_number in repo $owner/$repo"
+	    else
+		echo "Failed to approve PR #$pull_number in repo $owner/$repo"
+	    fi
+	done
+}
+
 current_kubernetes_cluster() {
     current_cluster=$(cat ~/.kube/config | grep current-context |  cut -d \: -f 2)
     echo "%{$fg_bold[red]%}$current_cluster%{$reset_color%}"
